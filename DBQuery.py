@@ -116,7 +116,11 @@ def AddActivityEvent(values):
 def getReportByDate(date):
     try:
         cur = con.cursor()
-        query = "select * from revenue_events where event_date='{0}'".format(date)
+        query = """select rt.name, rt.type, re.revenue, re.ticket_sold
+                from revenue_type rt, revenue_events re 
+                where rt.revenue_id = re.revenue_id 
+                and event_date='{0}'
+                order by rt.type;""".format(date)
         print(query)
         cur.execute(query) # execute the query
         data = cur.fetchall() # fetch all the data
