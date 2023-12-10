@@ -3,112 +3,87 @@
 # test data
 
 testStudent = {
-    "name": "TESTSTUDENT",
+    "name": "teststudent",
     "schema":{
-        "NAME": {"type": "str", "label": "Name"},
-        "GENDER": {"type": "str", "label": "Gender"},
-        "EMAIL": {"type": "str", "label": "Email"}
-    }
+        "NAME": {"type": "str", "label": "Name", "isEditable": True},
+        "GENDER": {"type": "str", "label": "Gender", "isEditable": True},
+        "EMAIL": {"type": "str", "label": "Email", "isEditable": True},
+    },
+    "primaryKey": "NAME"
 }
 
 # actual data
 animal = {
-    "name": "ANIMAL",
+    "name": "animal",
     "schema": {
-        "ANIMAL_ID": {"type":"float", "label": "Animal ID"},
-        "STATUS": {"type":"str", "label": "Status"},
-        "BIRTH_YEAR": {"type":"float", "label": "Birth Year"},
-        "CAGE_ID": {"type": "float", "label": "Cage ID"},
-        "SPECIES_ID": {"type": "float", "label": "Species ID"},
+        "ANIMAL_ID": {"type":"float", "label": "Animal ID", "isEditable": True},
+        "STATUS": {"type":"str", "label": "Status", "isEditable": True},
+        "BIRTH_YEAR": {"type":"float", "label": "Birth Year", "isEditable": True},
+        "CAGE_ID": {"type": "float", "label": "Cage ID", "isEditable": True},
+        "SPECIES_ID": {"type": "float", "label": "Species ID", "isEditable": True},
     },
     "primarykey": "ANIMAL_ID"
 }
 
 species = {
-    "name": "SPECIES",
+    "name": "species",
     "schema": {
-        "SPECIES_ID": {"type": "float", "label": "Species ID"},
-        "NAME": {"type":"str", "label": "Name"},
-        "DIET": {"type":"str", "label": "Diet"},
-        "POPULATION": {"type": "float", "label": "Population"},
-        "MONTHLY_FOOD_COST": {"type": "float", "label": "Monthly Food Cost"},
-        "VETERINARIAN_ID": {"type": "float", "label": "Veterinarian ID"},
-        "SPECIALIST_TRAINER_ID": {"type": "float", "label": "Specialist Trainer ID"}
+        "SPECIES_ID": {"type": "float", "label": "Species ID", "isEditable": True},
+        "NAME": {"type":"str", "label": "Name", "isEditable": True},
+        "DIET": {"type":"str", "label": "Diet", "isEditable": True},
+        "POPULATION": {"type": "float", "label": "Population", "isEditable": True},
+        "MONTHLY_FOOD_COST": {"type": "float", "label": "Monthly Food Cost", "isEditable": True},
+        "VETERINARIAN_ID": {"type": "float", "label": "Veterinarian ID", "isEditable": True},
+        "SPECIALIST_TRAINER_ID": {"type": "float", "label": "Specialist Trainer ID", "isEditable": True}
     },
     "primarykey": "SPECIES_ID"
 }
 
 building = {
-    "name": "BUILDING",
+    "name": "building",
     "schema": {
-        "BUILDING_ID": {"type": "float", "label": "Building ID"},
-        "NAME": {"type": "str", "label": "Building Name"},
-        "SQ_FEET": {"type": "float", "label": "Area(sq feet)"},
-        "NUM_FLOORS": {"type": "float", "label": "Number of Floors"},
+        "BUILDING_ID": {"type": "float", "label": "Building ID", "isEditable": True},
+        "NAME": {"type": "str", "label": "Building Name", "isEditable": True},
+        "SQ_FEET": {"type": "float", "label": "Area(sq feet)", "isEditable": True},
+        "NUM_FLOORS": {"type": "float", "label": "Number of Floors", "isEditable": True},
     },
     "primarykey": "BUILDING_ID"
 }
 
 cage = {
-    "name": "CAGE",
+    "name": "cage",
     "schema": {
-        "CAGE_ID": {"type": "float", "label": "Cage ID"},
-        "SQ_FEET": {"type": "float", "label": "Area(sq feet)"},
-        "BUILDING_ID": {"type": "float", "label": "Building ID"},
+        "CAGE_ID": {"type": "float", "label": "Cage ID", "isEditable": True},
+        "SQ_FEET": {"type": "float", "label": "Area(sq feet)", "isEditable": True},
+        "BUILDING_ID": {"type": "float", "label": "Building ID", "isEditable": True},
     },
     "primarykey": "CAGE_ID"
 }
 
 revenueType = {
-    "name": "REVENUE_TYPE",
+    "name": "revenue_type",
     "schema": {
-        "REVENUE_ID": {"type": "float", "label": "Revenue ID"},
-        "TYPE": {"type": "str", "label": "Revenue Type"},
-        "NAME": {"type": "str", "label": "Name"},
-        "BUILDING_ID": {"type": "float", "label": "Building ID"},
+        "revenue_id": {"type": "float", "label": "Revenue ID", "isEditable": True},
+        "name": {"type": "str", "label": "Name", "isEditable": True},
+        "type": {"type": "str", "label": "Revenue Type", "isEditable": True},
+        "attraction_show_name": {"type": "str", "label": "Show Name", "isEditable": True},
+        "adult_ticket_price": {"type": "float", "label": "Ticket Price(Adult)", "isEditable": True},
+        "senior_ticket_price": {"type": "float", "label": "Ticket Price(Senior)", "isEditable": True},
+        "children_ticket_price": {"type": "float", "label": "TIcket Price(Children)", "isEditable": True},
+        "product": {"type": "str", "label": "Product", "isEditable": True},
+        "product_price": {"type": "float", "label": "Price", "isEditable": True},
+        "building_id": {"type": "float", "label": "Building ID", "isEditable": True},
     },
     "primarykey": "REVENUE_ID"
 }
 
 revenueEvent = {
-    "name": "REVENUE_EVENT",
+    "name": "revenue_event",
     "schema": {
-        "REVENUE_ID": "float",
-        "EVENT_DATE": "datetime",
-        "REVENUE": "float",
-        "TICKET_SOLD": "float"
-    },
-    "primarykey": "REVENUE_ID"
-}
-
-attractionShow = {
-    "name": "ATTRACTION_SHOW",
-    "schema": {
-        "REVENUE_ID": {"type": "float", "label": "Revenue ID"},
-        "SHOWS_PER_DAY": {"type": "float", "label": "Shows Per Day"},
-        "ADULT_TICKET_PRICE": {"type": "float", "label": "Adult Ticket Price"},
-        "CHILDREN_TICKET_PRICE": {"type": "float", "label": "Children Ticket Price"},
-        "SENIOR_TICKET_PRICE": {"type": "float", "label": "Senior Ticket Price"},
-    },
-    "primarykey": "REVENUE_ID"
-}
-
-concession = {
-    "name": "CONCESSION",
-    "schema": {
-        "REVENUE_ID": {"type": "float", "label": "Revenue ID"},
-        "PRODUCT": {"type": "str", "label": "Product"},
-    },
-    "primarykey": "REVENUE_ID"
-}
-
-admission = {
-    "name": "ADMISSION",
-    "schema": {
-        "REVENUE_ID": {"type": "float", "label": "Revenue ID"},
-        "ADULT_TICKET_PRICE": {"type": "float", "label": "Adult Ticket Price"},
-        "CHILDREN_TICKET_PRICE": {"type": "float", "label": "Children Ticket Price"},
-        "SENIOR_TICKET_PRICE": {"type": "float", "label": "Senior Ticket Price"},
+        "REVENUE_ID": {"type": "float", "label": "Revenue ID", "isEditable": True},
+        "EVENT_DATE": {"type": "datetime", "label": "Event Date", "isEditable": True},
+        "REVENUE": {"type": "float", "label": "Revenue"}, "isEditable": True,
+        "TICKET_SOLD": {"type": "float", "label": "Ticket Sold", "isEditable": True},
     },
     "primarykey": "REVENUE_ID"
 }
