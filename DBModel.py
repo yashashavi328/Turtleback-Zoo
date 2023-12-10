@@ -137,4 +137,21 @@ employee = {
     "primarykey": "EMPLOYEE_ID"
 }
 
-hourly
+hourlyRate = {
+    "name": "HOURLY_RATE",
+    "schema": {
+        "HID": {"type": "float", "label": "Hourly ID"},
+        "JOB_TYPE": {"type": "str", "label": "Job Type"},
+        "PAY": {"type": "float", "label": "Hourly Rate"},
+    },
+    "primarykey": "HID"
+}
+
+participatesIn = {
+    "name": "PARTICIPATES_IN",
+    "schema": {
+        "ANIMAL_ID": {"type": "float", "label": "Animal ID"},
+        "REVENUE_ID": {"type": "float", "label": "Revenue ID"},
+    },
+    "primarykey": "REVENUE_ID"
+}
