@@ -116,11 +116,13 @@ def AddActivityEvent(values):
 def getReportByDate(date):
     try:
         cur = con.cursor()
+
+        dateValue = datetime.datetime.strptime(date, "%m/%d/%y").strftime("%d-%b-%y")
         query = """select rt.name, rt.type, re.revenue, re.ticket_sold
                 from revenue_type rt, revenue_events re 
                 where rt.revenue_id = re.revenue_id 
                 and event_date='{0}'
-                order by rt.type;""".format(date)
+                order by rt.type""".format(dateValue)
         print(query)
         cur.execute(query) # execute the query
         data = cur.fetchall() # fetch all the data
@@ -133,11 +135,46 @@ def getReportByDate(date):
         cur.close()
 
 def getAnimalPopulationReport():
-    pass
+    try:
+        cur = con.cursor()
+        query = """select s.sname,a.status,count(*) as population from species s, animal a
+                where s.species_id = a.species_id
+                group by (s.sname,a.status)
+                order by s.sname"""
+        print(query)
+        cur.execute(query) # execute the query
+        data = cur.fetchall() # fetch all the data
+        print("Selection Successful")
+        return data
+    except Exception as e:
+        print("Selection Failed")
+        print(e)
+    finally:
+        cur.close()
+    
+def getSpeciesMonthlyCostReport():
+    try:
+        cur = con.cursor()
+        query = """select sname, monthly_food_cost, 
+                (select pay*40*4 from hourly_rate where job_type='veterinarian') as vcost,
+                (select pay*40*4 from hourly_rate where job_type='animal care trainer') as scost
+                from species"""
+        print(query)
+        cur.execute(query) # execute the query
+        data = cur.fetchall() # fetch all the data
+        print("Selection Successful")
+        return data
+    except Exception as e:
+        print("Selection Failed")
+        print(e)
+    finally:
+        cur.close()
 
 def getTopThreeAttractionShow(beginDate, endDate):
     try:
         cur = con.cursor()
+        beginDateValue = datetime.datetime.strptime(beginDate, "%m/%d/%y").strftime("%d-%b-%y")
+        endDateValue = datetime.datetime.strptime(endDate, "%m/%d/%y").strftime("%d-%b-%y")
         query = """select name, total_revenue
                 from (select re.revenue_id, rt.name as name, total_revenue, dense_rank() over (order by total_revenue desc) as ranking
                 from revenue_type rt, (select revenue_id, sum(revenue) as total_revenue 
@@ -147,7 +184,7 @@ def getTopThreeAttractionShow(beginDate, endDate):
                 order by total_revenue desc) re
                 where rt.revenue_id=re.revenue_id
                 and rt.type='attraction show')
-                where ranking<=3;""".format(beginDate, endDate)
+                where ranking<=3""".format(beginDateValue, endDateValue)
         print(query)
         cur.execute(query) # execute the query
         data = cur.fetchall() # fetch all the data
@@ -167,7 +204,7 @@ def getFiveBestDaysByMonth(month):
                 where event_date like '%-{0}-%'
                 group by event_date
                 order by total_revenue desc)
-                where rownum<=5;""".format(month)
+                where rownum<=5""".format(month)
         print(query)
         cur.execute(query) # execute the query
         data = cur.fetchall() # fetch all the data
@@ -182,6 +219,8 @@ def getFiveBestDaysByMonth(month):
 def getAverageRevenue(beginDate, endDate):
     try:
         cur = con.cursor()
+        beginDateValue = datetime.datetime.strptime(beginDate, "%m/%d/%y").strftime("%d-%b-%y")
+        endDateValue = datetime.datetime.strptime(endDate, "%m/%d/%y").strftime("%d-%b-%y")
         query = """select rt.name, rt.type, re.avg_revenue
                 from revenue_type rt,
                 (select revenue_id, avg(revenue) as avg_revenue
@@ -189,7 +228,7 @@ def getAverageRevenue(beginDate, endDate):
                 where event_date between '{0}' and '{1}'
                 group by revenue_id) re
                 where rt.revenue_id = re.revenue_id
-                order by rt.type;""".format(beginDate, endDate)
+                order by rt.type""".format(beginDateValue, endDateValue)
         print(query)
         cur.execute(query) # execute the query
         data = cur.fetchall() # fetch all the data

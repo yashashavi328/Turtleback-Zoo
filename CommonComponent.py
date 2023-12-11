@@ -7,16 +7,18 @@ import DBQuery as db
 
 # Create View Table
 def createTable(masterWindow, row, column, data, columnNames):
+    tableContainer = tk.Toplevel(master=masterWindow, width=1000, height=700, bg="white")
+    tableContainer.title("Table")
     # Create Table Title
     j = 0
     for key, value in columnNames.items():
         print(key, value)
-        label = tk.Label(master=masterWindow, text=value.get("label"), font=("Calibri", 15, "bold"), bg="white")
+        label = tk.Label(master=tableContainer, text=value.get("label"), font=("Calibri", 15, "bold"), bg="white")
         label.grid(row=0, column=j)
         j+=1
     for i in range(row):
         for j in range(column):
-            label = tk.Label(master=masterWindow, text=data[i][j], font=("Calibri", 15), bg="white")
+            label = tk.Label(master=tableContainer, text=data[i][j], font=("Calibri", 15), bg="white")
             label.grid(row=i+1, column=j)
 
 # Create Insert Form

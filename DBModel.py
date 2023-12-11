@@ -21,6 +21,7 @@ animal = {
         "BIRTH_YEAR": {"type":"float", "label": "Birth Year", "isEditable": True},
         "CAGE_ID": {"type": "float", "label": "Cage ID", "isEditable": True},
         "SPECIES_ID": {"type": "float", "label": "Species ID", "isEditable": True},
+        "NAME": {"type": "str", "label": "Name", "isEditable": True},
     },
     "primarykey": "ANIMAL_ID"
 }
@@ -88,6 +89,29 @@ revenueEvent = {
     "primarykey": "REVENUE_ID"
 }
 
-employee = {}
+employee = {
+    "name": "EMPLOYEE",
+    "schema": {
+        "EMPLOYEE_ID": {"type": "float", "label": "Employee ID"},
+        "FIRST_NAME": {"type": "str", "label": "First Name"},
+        "LAST_NAME": {"type": "str", "label": "Last Name"},
+        "START_DATE": {"type": "date", "label": "Start Date"},
+        "APARTMENT": {"type": "str", "label": "Apartment"},
+        "STREET": {"type": "str", "label": "Street"},
+        "STATE": {"type": "str", "label": "State"},
+        "ZIPCODE": {"type": "str", "label": "Zipcode"},
+        "PHONE_NUM": {"type": "str", "label": "Phone Number"},
+        "JOB_TYPE": {"type": "str", "label": "Job Type"},
+        "SUPERVISOR_ID": {"type": "float", "label": "Supervisor ID"},
+        "FLAG_VETERINARIAN": {"type": "str", "label": "Flag Veterinarian"},
+        "LICENSE_NUM": {"type": "str", "label": "License Number"},
+        "DEGREE_YR": {"type": "float", "label": "Degree Year"},
+        "FLAG_ANIMAL_CARE_TRAINER": {"type": "str", "label": "Flag Animal Care Trainer"},
+        "FLAG_MAINTENANCE": {"type": "str", "label": "Flag Maintenance"},
+        "FLAG_CUSTOMER_SERVICE": {"type": "str", "label": "Flag Customer Service"},
+        "FLAG_TICKET_SELLER": {"type": "str", "label": "Flag Ticket Seller"},
+    },
+    "primarykey": "EMPLOYEE_ID"
+}
 
 

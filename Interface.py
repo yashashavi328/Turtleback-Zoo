@@ -1,20 +1,18 @@
 # Turtleback Zoo GUI Application
-
 # Standard Library Imports
 import tkinter as tk
+import datetime as dt
+from tkcalendar import Calendar
 
 # User Defined Imports
 import DBQuery as db
 import DBModel as model
+import UIModel as uiModel
 import CommonComponent as cmp
 from Constant import *
 
-
 # Asset Management Page
-# Asset Management Functions
 def openAssetOperationWindow(masterWindow, tableData, mode):
-    # assetOperationWindow = tk.Toplevel(master=masterWindow, bg="white")
-    # assetOperationWindow.title("Asset Management")
     data = db.SelectFromTable(tableData.get("name"))
     if(mode == 0): # view mode
         if(len(data) == 0):
@@ -291,6 +289,7 @@ def openActivityListWindow(masterWindow, mode):
     backBtn.place(x=50, y=550)
 
 def openDailyActivity():
+    
     mode = {
         "view": 0,
         "insert": 1,
@@ -312,6 +311,215 @@ def openDailyActivity():
     insertBtn.place(x=450, y=250)
     
 # Reporting Page
+def openAnimalReportWindow(masterWindow, reportType):
+    if(reportType == 1):
+        data = db.getAnimalPopulationReport()
+        if(data is None or len(data) == 0):
+            print("No data found")
+        else:
+            column = len(data[0])
+            row = len(data)
+            cmp.createTable(masterWindow, row, column, data, uiModel.animalPopulation.get("schema"))
+    elif(reportType == 2):
+        data = db.getSpeciesMonthlyCostReport()
+        if(data is None or len(data) == 0):
+            print("No data found")
+        else:
+            column = len(data[0])
+            row = len(data)
+            cmp.createTable(masterWindow, row, column, data, uiModel.speciesMonthlyCost.get("schema"))
+
+def openReportingWindow(masterWindow, reportType):
+    # Reporting 
+    if(reportType == 1):
+        # Report By Date
+        reportByDateWindow = tk.Toplevel(master=masterWindow, width=1000, height=700, bg="white")
+        reportByDateWindow.title("Report & Management")
+
+        # Report By Date Page Title
+        top3AttTitle = tk.Label(master=reportByDateWindow, text="Report By Date", font=("Calibri", 50), bg="white", width=25)
+        top3AttTitle.place(x=50, y=20)
+
+        # Date Label
+        dateLabel = tk.Label(master=reportByDateWindow, text="Please Select Date", font=("Calibri", 15), bg="white", width=25)
+        dateLabel.place(x=50, y=250)
+
+        # Date Entry
+        currentDate = dt.datetime.now()
+        dateEntry = Calendar(reportByDateWindow, selectmode="day", year=currentDate.year, month=currentDate.month, day=currentDate.day, date_pattern="mm/dd/yy")
+        dateEntry.place(x=350, y=250, )
+
+        # Back Button
+        backBtn = tk.Button(master=reportByDateWindow, text="Back", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=reportByDateWindow.destroy)
+        backBtn.place(x=50, y=550)
+
+        def submit():
+            data = db.getReportByDate(dateEntry.get_date())
+            print(data)
+            if(data is None or len(data) == 0):
+                print("No data found")
+            else:
+                column = len(data[0])
+                row = len(data)
+                cmp.createTable(masterWindow, row, column, data, uiModel.dailyReport.get("schema"))
+                reportByDateWindow.destroy()
+
+        # Submit Button
+        submitBtn = tk.Button(master=reportByDateWindow, text="Submit", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=submit)
+        submitBtn.place(x=350, y=550)
+    elif(reportType == 2):
+        # Report By Date
+        reportByDateWindow = tk.Toplevel(master=masterWindow, width=1000, height=700, bg="white")
+        reportByDateWindow.title("Report & Management")
+
+        # Report By Date Page Title
+        top3AttTitle = tk.Label(master=reportByDateWindow, text="Animal Population & Cost", font=("Calibri", 50), bg="white", width=25)
+        top3AttTitle.place(x=50, y=20)
+
+        populationBtn = tk.Button(master=reportByDateWindow, text="Animal Population", font=("Calibri", 15), bg="cyan", bd=3, width=25, command=lambda: openAnimalReportWindow(reportByDateWindow, 1))
+        populationBtn.place(x=150, y=250)
+
+        monthlyCostBtn = tk.Button(master=reportByDateWindow, text="Monthly Cost", font=("Calibri", 15), bg="cyan", bd=3, width=25, command=lambda: openAnimalReportWindow(reportByDateWindow, 2))
+        monthlyCostBtn.place(x=500, y=250)
+
+    elif(reportType == 3):
+        # Report By Date
+        reportByDateWindow = tk.Toplevel(master=masterWindow, width=1000, height=700, bg="white")
+        reportByDateWindow.title("Report & Management")
+
+        # Report By Date Page Title
+        reportByDateTitle = tk.Label(master=reportByDateWindow, text="Top 3 Attraction", font=("Calibri", 50), bg="white", width=25)
+        reportByDateTitle.place(x=50, y=20)
+
+        currentDate = dt.datetime.now()
+        
+        # Date Label
+        dateLabel = tk.Label(master=reportByDateWindow, text="Please Select Beginning Date", font=("Calibri", 15), bg="white", width=25)
+        dateLabel.place(x=50, y=150)
+
+        # Date Entry
+        beginDate = Calendar(reportByDateWindow, selectmode="day", year=currentDate.year, month=currentDate.month, day=currentDate.day, date_pattern="mm/dd/yy")
+        beginDate.place(x=350, y=150, )
+
+         # Date Label
+        dateLabel = tk.Label(master=reportByDateWindow, text="Please Select Ending Date", font=("Calibri", 15), bg="white", width=25)
+        dateLabel.place(x=50, y=350)
+
+        # Date Entry
+        endDate = Calendar(reportByDateWindow, selectmode="day", year=currentDate.year, month=currentDate.month, day=currentDate.day, date_pattern="mm/dd/yy")
+        endDate.place(x=350, y=350, )
+
+        # Back Button
+        backBtn = tk.Button(master=reportByDateWindow, text="Back", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=reportByDateWindow.destroy)
+        backBtn.place(x=50, y=550)
+
+        def submit():
+            data = db.getTopThreeAttractionShow(beginDate.get_date(), endDate.get_date())
+            print(data)
+            if(data is None or len(data) == 0):
+                print("No data found")
+            else:
+                column = len(data[0])
+                row = len(data)
+                cmp.createTable(masterWindow, row, column, data, uiModel.topThree.get("schema"))
+                reportByDateWindow.destroy()
+        # Submit Button
+        submitBtn = tk.Button(master=reportByDateWindow, text="Submit", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=submit)
+        submitBtn.place(x=350, y=550)
+    elif(reportType == 4):
+        # Report By Date
+        reportByDateWindow = tk.Toplevel(master=masterWindow, height=400, width=620, bg="white")
+        reportByDateWindow.title("Report & Management")
+
+        # Report By Date Page Title
+        reportByDateTitle = tk.Label(master=reportByDateWindow, text="Best 5 days of Month", font=("Calibri", 50), bg="white")
+        reportByDateTitle.place(x=20, y=20)
+
+        # Month Selection
+        monthLabel = tk.Label(master=reportByDateWindow, text="Please Select a Month", font=("Calibri", 15), bg="white", width=25)
+        monthLabel.place(x=50, y=120)
+        
+        monthOption = []
+        for row in Month.values():
+            monthOption.append(row.get("name"))
+        
+        monthVar = tk.StringVar(reportByDateWindow)
+        monthVar.set(monthOption[0])
+        monthMenu = tk.OptionMenu(reportByDateWindow, monthVar, *monthOption)
+        monthMenu.place(x=350, y=120)
+
+         # Back Button
+        backBtn = tk.Button(master=reportByDateWindow, text="Back", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=reportByDateWindow.destroy)
+        backBtn.place(x=50, y=250)
+
+        def submit():
+            monthVal = None
+            for value in Month.values():
+                if(value.get("name") == monthVar.get()):
+                    monthVal = value.get("query")
+                    break
+            data = db.getFiveBestDaysByMonth(monthVal)
+            print(data)
+            if(data is None or len(data) == 0):
+                print("No data found")
+            else:
+                tableData = []
+                for row in data:
+                    row = list(row)
+                    row[0] = row[0].strftime("%d-%b-%y")
+                    tableData.append(row)
+                column = len(tableData[0])
+                row = len(tableData)
+                cmp.createTable(masterWindow, row, column, tableData, uiModel.best5Days.get("schema"))
+                reportByDateWindow.destroy()
+        # Submit Button
+        submitBtn = tk.Button(master=reportByDateWindow, text="Submit", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=submit)
+        submitBtn.place(x=300, y=250)
+    elif(reportType == 5):
+         # Report By Date
+        reportByDateWindow = tk.Toplevel(master=masterWindow, width=1000, height=700, bg="white")
+        reportByDateWindow.title("Report & Management")
+
+        # Report By Date Page Title
+        reportByDateTitle = tk.Label(master=reportByDateWindow, text="Average Revenue in a Duration", font=("Calibri", 50), bg="white", width=25)
+        reportByDateTitle.place(x=50, y=20)
+
+        currentDate = dt.datetime.now()
+        
+        # Date Label
+        dateLabel = tk.Label(master=reportByDateWindow, text="Please Select Beginning Date", font=("Calibri", 15), bg="white", width=25)
+        dateLabel.place(x=50, y=150)
+
+        # Date Entry
+        beginDate = Calendar(reportByDateWindow, selectmode="day", year=currentDate.year, month=currentDate.month, day=currentDate.day, date_pattern="mm/dd/yy")
+        beginDate.place(x=350, y=150, )
+
+         # Date Label
+        dateLabel = tk.Label(master=reportByDateWindow, text="Please Select Ending Date", font=("Calibri", 15), bg="white", width=25)
+        dateLabel.place(x=50, y=350)
+
+        # Date Entry
+        endDate = Calendar(reportByDateWindow, selectmode="day", year=currentDate.year, month=currentDate.month, day=currentDate.day, date_pattern="mm/dd/yy")
+        endDate.place(x=350, y=350, )
+
+        # Back Button
+        backBtn = tk.Button(master=reportByDateWindow, text="Back", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=reportByDateWindow.destroy)
+        backBtn.place(x=50, y=550)
+
+        def submit():
+            data = db.getAverageRevenue(beginDate.get_date(), endDate.get_date())
+            print(data)
+            if(data is None or len(data) == 0):
+                print("No data found")
+            else:
+                column = len(data[0])
+                row = len(data)
+                cmp.createTable(masterWindow, row, column, data, uiModel.avgRevenue.get("schema"))
+                reportByDateWindow.destroy()
+        # Submit Button
+        submitBtn = tk.Button(master=reportByDateWindow, text="Submit", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=submit)
+        submitBtn.place(x=350, y=550)
+
 def openReporting():
     reportingWindow = tk.Toplevel(master=window, width=1000, height=700, bg="white")
     reportingWindow.title("Management & Reporting")
@@ -319,6 +527,22 @@ def openReporting():
     # Daily Activity Page Title
     reportingTitle = tk.Label(master=reportingWindow, text="Management & Reporting", font=("Calibri", 50), bg="white", width=25)
     reportingTitle.place(x=50, y=20)
+    
+    # Daily Activity Page Buttons
+    btn1 = tk.Button(master=reportingWindow, text="Report by Date", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=lambda: openReportingWindow(reportingWindow, 1))
+    btn1.place(x=150, y=250)
+
+    btn2 = tk.Button(master=reportingWindow, text="Animal Report", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=lambda: openReportingWindow(reportingWindow, 2))
+    btn2.place(x=450, y=250)
+
+    btn3 = tk.Button(master=reportingWindow, text="Top 3 Attraction", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=lambda: openReportingWindow(reportingWindow, 3))
+    btn3.place(x=750, y=250)
+
+    btn4 = tk.Button(master=reportingWindow, text="Top 5 Days of Month", font=("Calibri", 20), bg="cyan", bd=1, width=20, command=lambda: openReportingWindow(reportingWindow, 4))
+    btn4.place(x=250, y=400)
+
+    btn5 = tk.Button(master=reportingWindow, text="Average Revenue", font=("Calibri", 20), bg="cyan", bd=1, width=20, command=lambda: openReportingWindow(reportingWindow, 5))
+    btn5.place(x=600, y=400)
 
 
 # Home Page
