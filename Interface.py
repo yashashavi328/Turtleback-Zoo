@@ -45,27 +45,23 @@ def openTableListWindow(masterWindow, mode):
     tableListTitle.place(x=50, y=20)
 
     # Asset Management Page Buttons
-    assetBtn = tk.Button(master=tableListWindow, text="Species", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=lambda: openAssetOperationWindow(tableListWindow, model.species, mode))
-    assetBtn.place(x=50, y=250)
-
     animalBtn = tk.Button(master=tableListWindow, text="Animal", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=lambda: openAssetOperationWindow(tableListWindow, model.animal, mode))
-    animalBtn.place(x=350, y=250)
-
-    employeeBtn = tk.Button(master=tableListWindow, text="Employee", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=lambda: openAssetOperationWindow(tableListWindow, model.employee, mode))
-    employeeBtn.place(x=650, y=250)
+    animalBtn.place(x=50, y=250)
 
     buildingBtn = tk.Button(master=tableListWindow, text="Building", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=lambda: openAssetOperationWindow(tableListWindow, model.building, mode))
-    buildingBtn.place(x=50, y=400)
+    buildingBtn.place(x=350, y=250)
 
-    revenueBtn = tk.Button(master=tableListWindow, text="Revenue Type", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=lambda: openAssetOperationWindow(tableListWindow, model.revenueType, mode))
-    revenueBtn.place(x=350, y=400)
+    revenueBtn = tk.Button(master=tableListWindow, text="Attraction", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=lambda: openAssetOperationWindow(tableListWindow, model.revenueType, mode))
+    revenueBtn.place(x=650, y=250)
 
-    testBtn = tk.Button(master=tableListWindow, text="Test Student", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=lambda: openAssetOperationWindow(tableListWindow, model.testStudent, mode))
-    testBtn.place(x=650, y=400)
+    employeeBtn = tk.Button(master=tableListWindow, text="Employee", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=lambda: openAssetOperationWindow(tableListWindow, model.employee, mode))
+    employeeBtn.place(x=50, y=400)
 
+    assetBtn = tk.Button(master=tableListWindow, text="Hourly Wage", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=lambda: openAssetOperationWindow(tableListWindow, model.hourlyRate, mode))
+    assetBtn.place(x=350, y=400)
 
     # Back Button
-    backBtn = tk.Button(master=tableListWindow, text="Back", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=tableListWindow.destroy)
+    backBtn = tk.Button(master=tableListWindow, text="Back", font=("Calibri", 20), bg="yellow", bd=1, width=15, command=tableListWindow.destroy)
     backBtn.place(x=50, y=550)
 
 def openAssetMgmt():
@@ -147,7 +143,7 @@ def openActivityWindow(masterWindow, revenueType, mode):
             quantityEntry.grid(row=2, column=1)
 
             # Back Button
-            backBtn = tk.Button(master=activityInsertFormWindow, text="Back", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=activityInsertFormWindow.destroy)
+            backBtn = tk.Button(master=activityInsertFormWindow, text="Back", font=("Calibri", 20), bg="yellow", bd=1, width=15, command=activityInsertFormWindow.destroy)
             backBtn.grid(row=3, column=0)
 
             def submit():    
@@ -167,7 +163,7 @@ def openActivityWindow(masterWindow, revenueType, mode):
                 print(activityId, ticketPrice)
                 db.AddActivityEvent([activityId, ticketPrice*int(quantityEntry.get()), int(quantityEntry.get())])
             # Submit Button
-            submitBtn = tk.Button(master=activityInsertFormWindow, text="Submit", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=submit)
+            submitBtn = tk.Button(master=activityInsertFormWindow, text="Submit", font=("Calibri", 20), bg="green2", bd=1, width=15, command=submit)
             submitBtn.grid(row=3, column=1)
 
         elif(revenueType == "concession"):
@@ -191,7 +187,7 @@ def openActivityWindow(masterWindow, revenueType, mode):
             quantityEntry.grid(row=1, column=1)
 
             # Back Button
-            backBtn = tk.Button(master=activityInsertFormWindow, text="Back", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=activityInsertFormWindow.destroy)
+            backBtn = tk.Button(master=activityInsertFormWindow, text="Back", font=("Calibri", 20), bg="yellow", bd=1, width=15, command=activityInsertFormWindow.destroy)
             backBtn.grid(row=2, column=0)
 
             def submit():    
@@ -206,7 +202,7 @@ def openActivityWindow(masterWindow, revenueType, mode):
                 print(activityId, productPrice)
                 db.AddActivityEvent([activityId, productPrice*int(quantityEntry.get()), int(quantityEntry.get())])
             # Submit Button
-            submitBtn = tk.Button(master=activityInsertFormWindow, text="Submit", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=submit)
+            submitBtn = tk.Button(master=activityInsertFormWindow, text="Submit", font=("Calibri", 20), bg="green2", bd=1, width=15, command=submit)
             submitBtn.grid(row=2, column=1)
 
         elif(revenueType == "admission"):
@@ -243,7 +239,7 @@ def openActivityWindow(masterWindow, revenueType, mode):
             quantityEntry.grid(row=2, column=1)
 
             # Back Button
-            backBtn = tk.Button(master=activityInsertFormWindow, text="Back", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=activityInsertFormWindow.destroy)
+            backBtn = tk.Button(master=activityInsertFormWindow, text="Back", font=("Calibri", 20), bg="yellow", bd=1, width=15, command=activityInsertFormWindow.destroy)
             backBtn.grid(row=3, column=0)
 
             def submit():    
@@ -263,7 +259,7 @@ def openActivityWindow(masterWindow, revenueType, mode):
                 print(activityId, ticketPrice)
                 db.AddActivityEvent([activityId, ticketPrice*int(quantityEntry.get()), int(quantityEntry.get())])
             # Submit Button
-            submitBtn = tk.Button(master=activityInsertFormWindow, text="Submit", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=submit)
+            submitBtn = tk.Button(master=activityInsertFormWindow, text="Submit", font=("Calibri", 20), bg="green2", bd=1, width=15, command=submit)
             submitBtn.grid(row=3, column=1)
 
 def openActivityListWindow(masterWindow, mode):
@@ -285,7 +281,7 @@ def openActivityListWindow(masterWindow, mode):
     admissionBtn.place(x=650, y=250)
 
     # Back Button
-    backBtn = tk.Button(master=activityListWindow, text="Back", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=activityListWindow.destroy)
+    backBtn = tk.Button(master=activityListWindow, text="Back", font=("Calibri", 20), bg="yellow", bd=1, width=15, command=activityListWindow.destroy)
     backBtn.place(x=50, y=550)
 
 def openDailyActivity():
@@ -350,7 +346,7 @@ def openReportingWindow(masterWindow, reportType):
         dateEntry.place(x=350, y=250, )
 
         # Back Button
-        backBtn = tk.Button(master=reportByDateWindow, text="Back", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=reportByDateWindow.destroy)
+        backBtn = tk.Button(master=reportByDateWindow, text="Back", font=("Calibri", 20), bg="yellow", bd=1, width=15, command=reportByDateWindow.destroy)
         backBtn.place(x=50, y=550)
 
         def submit():
@@ -365,7 +361,7 @@ def openReportingWindow(masterWindow, reportType):
                 reportByDateWindow.destroy()
 
         # Submit Button
-        submitBtn = tk.Button(master=reportByDateWindow, text="Submit", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=submit)
+        submitBtn = tk.Button(master=reportByDateWindow, text="Submit", font=("Calibri", 20), bg="green2", bd=1, width=15, command=submit)
         submitBtn.place(x=350, y=550)
     elif(reportType == 2):
         # Report By Date
@@ -410,7 +406,7 @@ def openReportingWindow(masterWindow, reportType):
         endDate.place(x=350, y=350, )
 
         # Back Button
-        backBtn = tk.Button(master=reportByDateWindow, text="Back", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=reportByDateWindow.destroy)
+        backBtn = tk.Button(master=reportByDateWindow, text="Back", font=("Calibri", 20), bg="yellow", bd=1, width=15, command=reportByDateWindow.destroy)
         backBtn.place(x=50, y=550)
 
         def submit():
@@ -424,7 +420,7 @@ def openReportingWindow(masterWindow, reportType):
                 cmp.createTable(masterWindow, row, column, data, uiModel.topThree.get("schema"))
                 reportByDateWindow.destroy()
         # Submit Button
-        submitBtn = tk.Button(master=reportByDateWindow, text="Submit", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=submit)
+        submitBtn = tk.Button(master=reportByDateWindow, text="Submit", font=("Calibri", 20), bg="green2", bd=1, width=15, command=submit)
         submitBtn.place(x=350, y=550)
     elif(reportType == 4):
         # Report By Date
@@ -449,7 +445,7 @@ def openReportingWindow(masterWindow, reportType):
         monthMenu.place(x=350, y=120)
 
          # Back Button
-        backBtn = tk.Button(master=reportByDateWindow, text="Back", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=reportByDateWindow.destroy)
+        backBtn = tk.Button(master=reportByDateWindow, text="Back", font=("Calibri", 20), bg="yellow", bd=1, width=15, command=reportByDateWindow.destroy)
         backBtn.place(x=50, y=250)
 
         def submit():
@@ -473,7 +469,7 @@ def openReportingWindow(masterWindow, reportType):
                 cmp.createTable(masterWindow, row, column, tableData, uiModel.best5Days.get("schema"))
                 reportByDateWindow.destroy()
         # Submit Button
-        submitBtn = tk.Button(master=reportByDateWindow, text="Submit", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=submit)
+        submitBtn = tk.Button(master=reportByDateWindow, text="Submit", font=("Calibri", 20), bg="green2", bd=1, width=15, command=submit)
         submitBtn.place(x=300, y=250)
     elif(reportType == 5):
          # Report By Date
@@ -503,7 +499,7 @@ def openReportingWindow(masterWindow, reportType):
         endDate.place(x=350, y=350, )
 
         # Back Button
-        backBtn = tk.Button(master=reportByDateWindow, text="Back", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=reportByDateWindow.destroy)
+        backBtn = tk.Button(master=reportByDateWindow, text="Back", font=("Calibri", 20), bg="yellow", bd=1, width=15, command=reportByDateWindow.destroy)
         backBtn.place(x=50, y=550)
 
         def submit():
@@ -517,7 +513,7 @@ def openReportingWindow(masterWindow, reportType):
                 cmp.createTable(masterWindow, row, column, data, uiModel.avgRevenue.get("schema"))
                 reportByDateWindow.destroy()
         # Submit Button
-        submitBtn = tk.Button(master=reportByDateWindow, text="Submit", font=("Calibri", 20), bg="cyan", bd=1, width=15, command=submit)
+        submitBtn = tk.Button(master=reportByDateWindow, text="Submit", font=("Calibri", 20), bg="green2", bd=1, width=15, command=submit)
         submitBtn.place(x=350, y=550)
 
 def openReporting():
