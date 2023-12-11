@@ -1,11 +1,20 @@
-# test data
 
-testStudent = {
-    "name": "teststudent",
+dailyReport = {
+    "name": "Daily Report",
     "schema":{
-        "NAME": {"type": "str", "label": "Name", "isEditable": True},
-        "GENDER": {"type": "str", "label": "Gender", "isEditable": True},
-        "EMAIL": {"type": "str", "label": "Email", "isEditable": True},
+        "NAME": {"type": "str", "label": "Name"},
+        "TYPE": {"type": "str", "label": "Type"},
+        "REVENUE": {"type": "str", "label": "Revenue"},
+        "TICKETS_SOLD": {"type": "str", "label": "Tickets Sold"},
     },
-    "primaryKey": "NAME"
 }
+
+
+topThree = {
+    "name": "Top Attractions",
+    "schema":{
+        "REVENUE_ID": {"type": "float", "label": "Revenue ID"},
+        "NAME": {"type": "str", "label": "Name"},
+    },
+}
+
