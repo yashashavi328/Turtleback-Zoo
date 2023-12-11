@@ -31,7 +31,7 @@ species = {
         "POPULATION": {"type": "float", "label": "Population"},
         "MONTHLY_FOOD_COST": {"type": "float", "label": "Monthly Food Cost"},
         "VETERINARIAN_ID": {"type": "float", "label": "Veterinarian ID"},
-        "SPECIALIST_TRAINER_ID": {"type": "float", "label": "Specialist Trainer ID"}
+        "SPECIALIST_TRAINER_ID": {"type": "float", "label": "Specialist Trainer ID"},
         "NAME": {"type":"str", "label": "Name"},
     },
     "primarykey": "SPECIES_ID"
