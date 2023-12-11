@@ -9,12 +9,20 @@ dailyReport = {
     },
 }
 
-
 topThree = {
     "name": "Top Attractions",
     "schema":{
         "REVENUE_ID": {"type": "float", "label": "Revenue ID"},
         "NAME": {"type": "str", "label": "Name"},
+        "REVENUE": {"type": "str", "label": "Revenue"},
+    },
+}
+
+best5Days = {
+    "name": "Peak Revenue Days",
+    "schema":{
+        "DATE": {"type": "datetime", "label": "Date"},
+        "REVENUE": {"type": "str", "label": "Revenue"},
     },
 }
 
