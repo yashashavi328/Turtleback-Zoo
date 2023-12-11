@@ -28,12 +28,11 @@ species = {
     "name": "SPECIES",
     "schema": {
         "SPECIES_ID": {"type": "float", "label": "Species ID"},
-        "NAME": {"type":"str", "label": "Name"},
-        "DIET": {"type":"str", "label": "Diet"},
         "POPULATION": {"type": "float", "label": "Population"},
         "MONTHLY_FOOD_COST": {"type": "float", "label": "Monthly Food Cost"},
         "VETERINARIAN_ID": {"type": "float", "label": "Veterinarian ID"},
         "SPECIALIST_TRAINER_ID": {"type": "float", "label": "Specialist Trainer ID"}
+        "NAME": {"type":"str", "label": "Name"},
     },
     "primarykey": "SPECIES_ID"
 }
@@ -45,6 +44,7 @@ building = {
         "NAME": {"type": "str", "label": "Building Name"},
         "SQ_FEET": {"type": "float", "label": "Area(sq feet)"},
         "NUM_FLOORS": {"type": "float", "label": "Number of Floors"},
+        "PURPOSE": {"type": "str", "label": "Purpose"},
     },
     "primarykey": "BUILDING_ID"
 }
@@ -63,8 +63,8 @@ revenueType = {
     "name": "REVENUE_TYPE",
     "schema": {
         "REVENUE_ID": {"type": "float", "label": "Revenue ID"},
-        "TYPE": {"type": "str", "label": "Revenue Type"},
         "NAME": {"type": "str", "label": "Name"},
+        "TYPE": {"type": "str", "label": "Revenue Type"},
         "BUILDING_ID": {"type": "float", "label": "Building ID"},
     },
     "primarykey": "REVENUE_ID"
